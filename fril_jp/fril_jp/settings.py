@@ -65,9 +65,24 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'fril_jp.pipelines.FrilJpPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   # 多个pipelines执行的优先级
+   #'fril_jp.pipelines.FrilJpPipeline': 300,
+   'fril_jp.pipelines.CSVFrilJpPipeline': 299
+}
+
+# CSV_DELIMITER = ","
+
+FEED_EXPORTERS = {                                                        
+    'csv': 'fril_jp.spiders.csv_item_exporter.MyProjectCsvItemExporter',   
+}                                          
+                                                                          
+FIELDS_TO_EXPORT = [                                                                                                                         
+    'name',                                                                                                                          
+    'url',                                                                
+    'img',                                                              
+    'desc'                                                   
+] 
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
